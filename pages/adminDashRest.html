@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .title-bar {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .dashboard {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .sidebar button:hover {
+            background-color: #555;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .actions button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .actions button:hover {
+            background-color: #555;
+        }
+        .add-restaurant-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .add-restaurant-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .add-restaurant-container button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title Bar -->
+    <div class="title-bar">
+        Admin Dashboard
+    </div>
+
+    <!-- Subtitle -->
+    <div class="subtitle">Admin Username</div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <div class="sidebar">
+            <button onclick="location.href='#restaurant'">Restaurant</button>
+            <button onclick="location.href='#user'">User</button>
+        </div>
+        <div class="content">
+            <!-- Table of Restaurants -->
+            <table>
+                <caption style="caption-side: top; font-size: 20px; font-weight: bold; margin-bottom: 10px;">List of Restaurants</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="Restaurant 1"></td>
+                        <td class="actions">
+                            <button>Update</button>
+                            <button>Remove</button>
+                            <button>Delete Recipes</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Restaurant 2"></td>
+                        <td class="actions">
+                            <button>Update</button>
+                            <button>Remove</button>
+                            <button>Delete Recipes</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Restaurant 3"></td>
+                        <td class="actions">
+                            <button>Update</button>
+                            <button>Remove</button>
+                            <button>Delete Recipes</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Add New Restaurant Button -->
+            <div class="add-restaurant-container">
+                <button>Add New Restaurant</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

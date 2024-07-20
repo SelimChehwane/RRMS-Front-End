@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .star {
+            font-size: 24px;
+            color: gray;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .star.gold {
+            color: gold;
+        }
+        .content {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <div class="title">Recipe View</div>
+
+    <!-- Subtitle with Star -->
+    <div class="subtitle">
+        <div class="star" onclick="toggleStar(this)">★</div>
+        <div>Recipe Name</div>
+    </div>
+
+    <!-- Content Text -->
+    <div class="content">
+        Here is some text describing the recipe. This text can include details about the ingredients, preparation steps, and other relevant information.
+    </div>
+
+    <script>
+        function toggleStar(star) {
+            star.classList.toggle('gold');
+        }
+    </script>
+
+</body>
+</html>
