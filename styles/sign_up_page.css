@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    height:100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign_up_card{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    justify-content: space-evenly;
+}
+
+.sign_up_form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;;
+}
