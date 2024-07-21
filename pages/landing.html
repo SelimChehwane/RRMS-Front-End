@@ -84,23 +84,13 @@
 
     <!-- Search Bar -->
     <div class="search-bar">
-        <form action="/search" method="get">
+        <form action="recipeFiltered.html" method="get">
             <input type="text" name="query" placeholder="Select Cuisine...">
             <input type="submit" value="Search">
         </form>
     </div>
-
-    <!-- Clickable Button -->
-    <div class="button-container">
-        <button onclick="location.href='#target-section'">VIEW A</button>
-    </div>
-    <div class="button-container">
-        <button onclick="location.href='#target-section'">VIEW B</button>
-    </div>
-    <div class="button-container">
-        <button onclick="location.href='#target-section'">VIEW C</button>
-    </div>
     
-
+    <script src="/scripts/RecipeJs/dom.js"></script>
+    <script src="/scripts/RecipeJs/favorites.js"></script>
 </body>
 </html>
