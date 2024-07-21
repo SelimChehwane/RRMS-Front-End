@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (result.error) {
                 alert(result.error); 
             } else {
+                sessionStorage.setItem('user_id', result.user_id); // Store user_id in sessionStorage
+                sessionStorage.setItem('user_type', result.user_type); // Store user_type in sessionStorage
                 switch (result.user_type) {
                     case 'admin':
                         window.location.href = '../pages/adminDashRest.html';

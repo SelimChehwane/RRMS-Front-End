@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard Restaurant</title>
+    <title>Owner Dashboard</title>
     <link rel="stylesheet" href="/styles/ownerDash.css">
     <style>
         body {
@@ -159,71 +159,61 @@
     </div>
 
     <!-- Subtitle -->
-    <div class="subtitle">Owner Username</div>
+    <div class="subtitle" id="owner-username">Owner Username</div>
 
     <!-- Dashboard -->
     <div class="dashboard">
         <div class="sidebar">
-            <div class="recipe_title">Recipies</div>
-            
+            <div class="recipe_title">Recipes</div>
         </div>
         <div class="content">
-            <!-- Table of Restaurants -->
+            <!-- Table of Recipes -->
             <table>
-                <caption style="caption-side: top; font-size: 20px; font-weight: bold; margin-bottom: 10px;">List of Restaurants</caption>
+                <caption style="caption-side: top; font-size: 20px; font-weight: bold; margin-bottom: 10px;">List of Recipes</caption>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Cuisine Type</th>
                         <th>Description</th>
+                        <th>Instructions</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="restaurant-list">
+                <tbody id="recipe-list">
                     <!-- Dynamic Content -->
                 </tbody>
             </table>
 
-            <!-- Add New Restaurant Button -->
+            <!-- Add New Recipe Button -->
             <div class="add-restaurant-container">
-                <button id="addRestaurantBtn">Add New Restaurant</button>
+                <button id="addRecipeBtn">Add New Recipe</button>
             </div>
         </div>
     </div>
 
-    <div id="addRestaurantModal" class="modal">
+    <div id="addRecipeModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeAddModal">&times;</span>
-            <h2>Add New Restaurant</h2>
+            <h2>Add New Recipe</h2>
             <input type="text" id="addName" placeholder="Name" required>
-            <input type="text" id="addCuisine" placeholder="Cuisine Type" required>
+            <input type="text" id="addCuisineType" placeholder="Cuisine Type" required>
             <input type="text" id="addDescription" placeholder="Description" required>
-            <input type="text" id="addInstruction" placeholder="Instruction" required>
-            <button id="submitAddRestaurant">Add Restaurant</button>
+            <input type="text" id="addInstructions" placeholder="Instructions" required>
+            <button id="submitAddRecipe">Add Recipe</button>
         </div>
     </div>
 
-    <!-- Update Restaurant Modal -->
-    <div id="updateRestaurantModal" class="modal">
+    <!-- Update Recipe Modal -->
+    <div id="updateRecipeModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeUpdateModal">&times;</span>
-            <h2>Update Restaurant</h2>
-            <input type="hidden" id="updateRestaurantId">
+            <h2>Update Recipe</h2>
+            <input type="hidden" id="updateRecipeId">
             <input type="text" id="updateName" placeholder="Name">
-            <input type="text" id="updateLocation" placeholder="Location">
-            <input type="text" id="updateOwnerId" placeholder="Owner Username">
-            <button id="submitUpdateRestaurant">Update Restaurant</button>
-        </div>
-    </div>
-
-    <!-- Delete Recipes Modal -->
-    <div id="deleteRecipesModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeDeleteRecipesModal">&times;</span>
-            <h2>Delete Recipes</h2>
-            <div id="recipes-list">
-                <!-- Dynamic Content -->
-            </div>
+            <input type="text" id="updateCuisineType" placeholder="Cuisine Type">
+            <input type="text" id="updateDescription" placeholder="Description">
+            <input type="text" id="updateInstructions" placeholder="Instructions">
+            <button id="submitUpdateRecipe">Update Recipe</button>
         </div>
     </div>
 

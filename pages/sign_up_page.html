@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="/styles/sign_up_page.css">
-    <script  src="/scripts/sign_up_page.js"></script>
 </head>
 <body>
-    <dev class="sign_up_card">
+    <div class="sign_up_card">
         <h2>Enter Account Details</h2>
         <form class="sign_up_form" id="sign_up_form">
-            <input class="email" type="email" id="email" placeholder="Email Address">
-            <input class="password" type="password" id="password" placeholder="Password">
-            <input class="username" id="username" type="text" placeholder="User Name">
-             <select id="user_type" required>
+            <input class="email" type="email" id="email" placeholder="Email Address" required>
+            <input class="password" type="password" id="password" placeholder="Password" required>
+            <input class="username" id="username" type="text" placeholder="User Name" required>
+            <select id="user_type" required>
                 <option value="">Select your type</option>
                 <option value="client">Client</option>
                 <option value="owner">Owner</option>
             </select>
-            <button type="submit" class="sign_up_button" id="sign_up">Create Account</button>
+            <div id="restaurant-details" style="display: none;">
+                <input type="text" id="restaurant_name" placeholder="Restaurant Name">
+                <input type="text" id="restaurant_location" placeholder="Restaurant Location">
+            </div>
+            <button type="submit" class="sign_up_button">Create Account</button>
         </form>
-    </dev>
-    <div>Already have an account?<a type="button" id="login_link" href="/index.html" >Login.</a></div>
+        <div>Already have an account? <a type="button" id="login_link" href="/index.html">Login.</a></div>
+    </div>
+    <script src="/scripts/sign_up_page.js"></script>
 </body>
 </html>
