@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
-    // Function to fetch and display recipes
     async function fetchRecipes() {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -26,18 +25,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const allRecipes = await response.json();
             const filteredRecipes = allRecipes.filter(recipe => recipe.cuisine_type === query);
 
-            filteredRecipes.forEach(recipe => {
+            for (const recipe of filteredRecipes) {
+                const restaurantResponse = await fetch('http://localhost/RRMS-BACK-END/restCRUD/getOneRest.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: recipe.restaurant_id })
+                });
+                const restaurant = await restaurantResponse.json();
+
                 const recipeElement = document.createElement('div');
                 recipeElement.classList.add('recipe');
                 recipeElement.innerHTML = `
                     <div class="recipe-details">
                         <h3>${recipe.name}</h3>
-                        <p>Restaurant ID: ${recipe.restaurant_id}</p>
+                        <p>Restaurant: ${restaurant.name}</p>
                     </div>
                     <button class="recipe-button" data-id="${recipe.recipe_id}">Details</button>
                 `;
                 recipesContainer.appendChild(recipeElement);
-            });
+            }
 
             document.querySelectorAll('.recipe-button').forEach(button => {
                 button.addEventListener('click', async (event) => {
@@ -50,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to show recipe details in modal
     async function showRecipeDetails(recipeId) {
         try {
             const response = await fetch('http://localhost/RRMS-BACK-END/recipeCRUD/getOneRecipe.php', {
@@ -64,11 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Network response was not ok');
             }
             const recipe = await response.json();
+            const restaurantResponse = await fetch('http://localhost/RRMS-BACK-END/restCRUD/getOneRest.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: recipe.restaurant_id })
+            });
+            const restaurant = await restaurantResponse.json();
+
             recipeDetails.innerHTML = `
                 <h2>${recipe.name}</h2>
                 <p><strong>Cuisine Type:</strong> ${recipe.cuisine_type}</p>
                 <p><strong>Description:</strong> ${recipe.description}</p>
                 <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+                <p><strong>Restaurant:</strong> ${restaurant.name}</p>
             `;
             favoriteStar.setAttribute('data-id', recipeId);
             favoriteStar.classList.remove('gold');
@@ -83,12 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Close the modal
     closeModal.addEventListener('click', () => {
         recipeModal.style.display = 'none';
     });
 
-    // Toggle favorite
     favoriteStar.addEventListener('click', () => {
         const recipeId = favoriteStar.getAttribute('data-id');
         if (favoriteStar.classList.contains('gray')) {

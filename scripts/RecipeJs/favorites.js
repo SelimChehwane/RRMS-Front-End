@@ -24,12 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ id: recipeId })
                 });
                 const recipe = await response.json();
+                const restaurantResponse = await fetch('http://localhost/RRMS-BACK-END/restCRUD/getOneRest.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: recipe.restaurant_id })
+                });
+                const restaurant = await restaurantResponse.json();
+
                 const recipeElement = document.createElement('div');
                 recipeElement.classList.add('recipe');
                 recipeElement.innerHTML = `
                     <div class="recipe-details">
                         <h3>${recipe.name}</h3>
-                        <p>Restaurant ID: ${recipe.restaurant_id}</p>
+                        <p>Restaurant: ${restaurant.name}</p>
                     </div>
                 `;
                 favoriteRecipesContainer.appendChild(recipeElement);
