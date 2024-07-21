@@ -3,31 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner Dashboard</title>
+    <title>Admin Dashboard Restaurant</title>
+    <link rel="stylesheet" href="/styles/ownerDash.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .title-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background-color: #333;
-            padding: 20px;
             color: white;
+            padding: 20px;
+            text-align: center;
         }
         .subtitle {
-            margin: 20px;
-            font-size: 24px;
-            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .dashboard {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .sidebar button:hover {
+            background-color: #555;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
         }
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             border: 1px solid #ccc;
@@ -52,11 +82,11 @@
         .actions button:hover {
             background-color: #555;
         }
-        .add-recipe-container {
+        .add-restaurant-container {
             text-align: center;
-            margin: 20px;
+            margin: 20px 0;
         }
-        .add-recipe-container button {
+        .add-restaurant-container button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #333;
@@ -65,7 +95,58 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        .add-recipe-container button:hover {
+        .add-restaurant-container button:hover {
+            background-color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-content input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .modal-content button:hover {
             background-color: #555;
         }
     </style>
@@ -74,51 +155,78 @@
 
     <!-- Title Bar -->
     <div class="title-bar">
-        <div>Owner Dashboard</div>
-        <div>Welcome User!</div>
+        Owner Dashboard
     </div>
 
     <!-- Subtitle -->
-    <div class="subtitle">Restaurant Name</div>
+    <div class="subtitle">Owner Username</div>
 
-    <!-- Table of Recipes -->
-    <table>
-        <caption style="caption-side: top; font-size: 20px; font-weight: bold; margin-bottom: 10px;">List of Recipes</caption>
-        <thead>
-            <tr>
-                <th>Recipe</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="text" placeholder="Recipe 1"></td>
-                <td class="actions">
-                    <button>Update</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="Recipe 2"></td>
-                <td class="actions">
-                    <button>Update</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="text" placeholder="Recipe 3"></td>
-                <td class="actions">
-                    <button>Update</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="recipe_title">Recipies</div>
+            
+        </div>
+        <div class="content">
+            <!-- Table of Restaurants -->
+            <table>
+                <caption style="caption-side: top; font-size: 20px; font-weight: bold; margin-bottom: 10px;">List of Restaurants</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cuisine Type</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="restaurant-list">
+                    <!-- Dynamic Content -->
+                </tbody>
+            </table>
 
-    <!-- Add New Recipe Button -->
-    <div class="add-recipe-container">
-        <button>Add New Recipe</button>
+            <!-- Add New Restaurant Button -->
+            <div class="add-restaurant-container">
+                <button id="addRestaurantBtn">Add New Restaurant</button>
+            </div>
+        </div>
     </div>
 
+    <div id="addRestaurantModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddModal">&times;</span>
+            <h2>Add New Restaurant</h2>
+            <input type="text" id="addName" placeholder="Name" required>
+            <input type="text" id="addCuisine" placeholder="Cuisine Type" required>
+            <input type="text" id="addDescription" placeholder="Description" required>
+            <input type="text" id="addInstruction" placeholder="Instruction" required>
+            <button id="submitAddRestaurant">Add Restaurant</button>
+        </div>
+    </div>
+
+    <!-- Update Restaurant Modal -->
+    <div id="updateRestaurantModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeUpdateModal">&times;</span>
+            <h2>Update Restaurant</h2>
+            <input type="hidden" id="updateRestaurantId">
+            <input type="text" id="updateName" placeholder="Name">
+            <input type="text" id="updateLocation" placeholder="Location">
+            <input type="text" id="updateOwnerId" placeholder="Owner Username">
+            <button id="submitUpdateRestaurant">Update Restaurant</button>
+        </div>
+    </div>
+
+    <!-- Delete Recipes Modal -->
+    <div id="deleteRecipesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeDeleteRecipesModal">&times;</span>
+            <h2>Delete Recipes</h2>
+            <div id="recipes-list">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/ownerDash.js"></script>
 </body>
 </html>

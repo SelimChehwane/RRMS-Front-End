@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             password: password.value
         }).toString();
 
-        fetch(`http://localhost/api/login.php?${queryParams}`, {
+        fetch(`http://localhost/RRMS-BACK-END/userCRUD/login.php?${queryParams}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 switch (result.user_type) {
                     case 'admin':
-                        window.location.href = '/admin_dashboard.html';
+                        window.location.href = '../pages/adminDashRest.html';
                         break;
                     case 'owner':
-                        window.location.href = '/owner_dashboard.html';
+                        window.location.href = '../pages/ownerDash.html';
                         break;
                     case 'client':
-                        window.location.href = '/search_page.html';
+                        window.location.href = '../pages/landing.html';
                         break;
                     default:
                         alert('Unknown user type.');

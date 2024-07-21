@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(data);
 
         
-        fetch('http://localhost/api/sign_up.php', {
+        fetch('http://localhost/RRMS-BACK-END/userCRUD/sign_up.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
