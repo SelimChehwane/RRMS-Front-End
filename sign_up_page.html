@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/sign_up_page.css">
+    <script  src="/scripts/sign_up_page.js"></script>
+</head>
+<body>
+    <dev class="sign_up_card">
+        <h2>Enter Account Details</h2>
+        <form class="sign_up_form" id="sign_up_form">
+            <input class="email" type="email" id="email" placeholder="Email Address">
+            <input class="password" type="password" id="password" placeholder="Password">
+            <input class="username" id="username" type="text" placeholder="User Name">
+             <select id="user_type" required>
+                <option value="">Select your type</option>
+                <option value="client">Client</option>
+                <option value="owner">Owner</option>
+            </select>
+            <button type="submit" class="sign_up_button" id="sign_up">Create Account</button>
+        </form>
+    </dev>
+    <div>Already have an account?<a type="button" id="login_link" href="/index.html" >Login.</a></div>
+</body>
+</html>
